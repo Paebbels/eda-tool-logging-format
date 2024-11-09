@@ -1,0 +1,2035 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unittesting &mdash; pyEDAA.Reports 0.14.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=77553476" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-reports.e44b1595f1e09d5e109d001839ba3f42.css?v=0b41afa8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/override.css?v=6943e0d8" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=0dc20415"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+      <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+      <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+      <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+      <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="EDA Tool Logs" href="../Logging/index.html" />
+    <link rel="prev" title="Documentation Coverage" href="../DocCoverage/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="https://edaa-org.github.io/">Used as a layer of EDA² ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dependency.html">Dependency</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Report Formats</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../CodeCoverage/index.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DocCoverage/index.html">Documentation Coverage</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Unittesting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#unified-data-model">Unified data model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#testcase-status">Testcase Status</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testcase">Testcase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testsuite">Testsuite</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testsuitesummary">TestsuiteSummary</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#document">Document</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#specific-data-models">Specific Data Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#junit-data-model">JUnit Data Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#unittest-specificdatamodel-junit-testcase">Testcase</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#testclass">Testclass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unittest-specificdatamodel-junit-testsuite">Testsuite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unittest-specificdatamodel-junit-testsuitesummary">TestsuiteSummary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unittest-specificdatamodel-junit-document">Document</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#junit-dialects">JUnit Dialects</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#any-junit">Any JUnit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ant-junit4">Ant + JUnit4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ctest-junit">CTest JUnit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#googletest-junit">GoogleTest JUnit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pytest-junit">pyTest JUnit</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#osvvm">OSVVM</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-test-entities">Create test entities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#reading-unittest-reports">Reading unittest reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#converting-unittest-reports">Converting unittest reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#annotations">Annotations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#merging-unittest-reports">Merging unittest reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concatenate-unittest-reports">Concatenate unittest reports</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#transforming-the-reports-hierarchy">Transforming the reports’ hierarchy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pytest-specific-transformations">pytest specific transformations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-unittest-reports">Writing unittest reports</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#command-line-tool">Command Line Tool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#file-formats">File Formats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ant-and-junit-4-xml">Ant and JUnit 4 XML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#junit-5-xml">JUnit 5 XML</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#open-test-reporting">Open Test Reporting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#osvvm-yaml">OSVVM YAML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#frameworks-tools">Frameworks / Tools</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ctest">CTest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#googletest-gtest">GoogleTest (gtest)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#junit4">JUnit4</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#junit5">JUnit5</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unittest-tool-osvvm">OSVVM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pytest">pytest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vunit">VUnit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#consumers">Consumers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#gitlab">GitLab</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jenkins">Jenkins</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dorney-github-action">Dorney (GitHub Action)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Logging/index.html">EDA Tool Logs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References and Reports</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CommandLineInterface.html">Command Line Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyEDAA.Reports/pyEDAA.Reports.html">Python Class Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reports/unittests.html">Unittest Summary Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reports/coverage/index.html">Code Coverage Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reports/doccoverage.html">Doc. Coverage Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reports/typing/index.html">Static Type Check Report ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Python Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TODO.html">TODOs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Old Content</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../old/Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/FunctionalCoverage.html">Functional coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/LineCoverage.html">Line coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/Resources.html">Synthesis and implementation results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/RichLogging.html">Semantic/rich logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/Tracking.html">Tracking requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/Frontends.html">Frontends</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyEDAA.Reports</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Unittesting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Unittesting/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style type="text/css">
+  span.bolditalic {font-weight: bold; font-style: italic; }
+  span.underline {text-decoration: underline; }
+  span.strike {text-decoration: line-through; }
+  span.xlarge {font-size: x-large; }
+  span.colorred {color: #CC0000; }
+  span.colorgreen {color: #009933; }
+  span.colorblue {color: #0066FF; }
+  span.colorpurple {color: #9900CC; }
+</style><section id="unittesting">
+<span id="unittest"></span><h1>Unittesting<a class="headerlink" href="#unittesting" title="Link to this heading"></a></h1>
+<p><em>pyEDAA.Reports</em> provides a unified and generic unittest summary data model. The data model allows the description of
+testcases grouped in testsuites. Testsuites can be nested in other testsuites. The data model’s root element is a
+special testsuite called testsuite summary. It contains only testsuites, but no testcases.</p>
+<p>The data model can be filled from various sources like <strong>Ant JUnit test reports</strong> or <strong>OSVVM testsuite summaries</strong> (more
+to be added). Many programming languages and/or unit testing frameworks support exporting results in the Ant JUnit
+format. See below for supported formats and their variations (dialects).</p>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The so called JUnit XML format is the weakest file format and standard ever seen. At first was not created by JUnit
+(version 4). It was added by the built system Ant, but it’s not called Ant XML format nor Ant JUnit XML format. The
+latest JUnit 5 uses a completely different format called <a class="reference internal" href="#unittest-fileformats-otr"><span class="std std-ref">open test reporting</span></a>. As
+JUnit is not the formats author, no file format documentation nor XML schema was provided. Also Ant isn’t providing
+any file format documentation or XML schema. Various Ant JUnit XML adopters have tried to reverse engineer a
+description and XML schemas, but unfortunately many are not even compatible to each other.</p>
+</div>
+<section id="unified-data-model">
+<span id="unittest-datamodel"></span><h2>Unified data model<a class="headerlink" href="#unified-data-model" title="Link to this heading"></a></h2>
+<p>The unified data model for test entities (test summary, test suite, test case) implements a super-set of all (so far
+known) unit test result summary file formats. pyEDAA.Report’s data model is a structural and functional cleanup of the
+Ant JUnit data model. Naming has been cleaned up and missing features have been added.</p>
+<p>As some of the JUnit XML dialects are too divergent from the original Ant + JUnit4 format, these dialects have an
+independent test entity inheritance hierarchy. Nonetheless, instances of each data format can be converted to and from
+the unified data model.</p>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-datamodel-testcase"><span class="std std-ref">Testcase</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">A <em class="dfn">test case</em> is the leaf-element in the test entity hierarchy and describes an individual test run.
+Test cases are grouped by test suites.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-datamodel-testsuite"><span class="std std-ref">Testsuite</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">A <em class="dfn">test suite</em> is a group of test cases and/or test suites. Test suites itself can be grouped by test
+suites. The test suite hierarchy’s root element is a test suite summary.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-datamodel-testsuitesummary"><span class="std std-ref">TestsuiteSummary</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">The <em class="dfn">test suite summary</em> is derived from test suite and defines the root of the test suite hierarchy.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-datamodel-document"><span class="std std-ref">Document</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">The <em class="dfn">document</em> is derived from a test suite summary and represents a file containing a test suite
+summary.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<pre  class="mermaid">
+        graph TD;
+  doc[Document]
+  sum[Summary]
+  ts1[Testsuite]
+  ts2[Testsuite]
+  ts21[Testsuite]
+  tc11[Testcase]
+  tc12[Testcase]
+  tc13[Testcase]
+  tc21[Testcase]
+  tc22[Testcase]
+  tc211[Testcase]
+  tc212[Testcase]
+  tc213[Testcase]
+
+  doc:::root -.-&gt; sum:::summary
+  sum --&gt; ts1:::suite
+  sum --&gt; ts2:::suite
+  ts2 --&gt; ts21:::suite
+  ts1 --&gt; tc11:::case
+  ts1 --&gt; tc12:::case
+  ts1 --&gt; tc13:::case
+  ts2 --&gt; tc21:::case
+  ts2 --&gt; tc22:::case
+  ts21 --&gt; tc211:::case
+  ts21 --&gt; tc212:::case
+  ts21 --&gt; tc213:::case
+
+  classDef root fill:#4dc3ff
+  classDef summary fill:#80d4ff
+  classDef suite fill:#b3e6ff
+  classDef case fill:#eeccff
+    </pre></div>
+</div>
+</div>
+<section id="testcase-status">
+<span id="unittest-datamodel-testcasestatus"></span><h3>Testcase Status<a class="headerlink" href="#testcase-status" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p><code class="xref py py-class docutils literal notranslate"><span class="pre">TestcaseStatus</span></code> and <code class="xref py py-class docutils literal notranslate"><span class="pre">TestsuiteStatus</span></code> are
+flag enumerations to describe the overall status of a test case or test suite.</p>
+<dl class="simple">
+<dt>Unknown</dt><dd><p>tbd</p>
+</dd>
+<dt>Excluded</dt><dd><p>tbd</p>
+</dd>
+<dt>Skipped</dt><dd><p>tbd</p>
+</dd>
+<dt>Weak</dt><dd><p>tbd</p>
+</dd>
+<dt>Passed</dt><dd><p>tbd</p>
+</dd>
+<dt>Failed</dt><dd><p>tbd</p>
+</dd>
+<dt>Inverted</dt><dd><p>tbd</p>
+</dd>
+<dt>Warned</dt><dd><p>tbd</p>
+</dd>
+<dt>Errored</dt><dd><p>tbd</p>
+</dd>
+<dt>Failed</dt><dd><p>tbd</p>
+</dd>
+<dt>SetupError</dt><dd><p>tbd</p>
+</dd>
+<dt>TearDownError</dt><dd><p>tbd</p>
+</dd>
+<dt>Inconsistent</dt><dd><p>tbd</p>
+</dd>
+</dl>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">TestcaseStatus</span><span class="p">(</span><span class="n">Flag</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;A flag enumeration describing the status of a test case.&quot;&quot;&quot;</span>
+  <span class="n">Unknown</span> <span class="o">=</span>    <span class="mi">0</span>                         <span class="c1">#: Testcase status is uninitialized and therefore unknown.</span>
+  <span class="n">Excluded</span> <span class="o">=</span>   <span class="mi">1</span>                         <span class="c1">#: Testcase was permanently excluded / disabled</span>
+  <span class="n">Skipped</span> <span class="o">=</span>    <span class="mi">2</span>                         <span class="c1">#: Testcase was temporarily skipped (e.g. based on a condition)</span>
+  <span class="n">Weak</span> <span class="o">=</span>       <span class="mi">4</span>                         <span class="c1">#: No assertions were recorded.</span>
+  <span class="n">Passed</span> <span class="o">=</span>     <span class="mi">8</span>                         <span class="c1">#: A passed testcase, because all assertions were successful.</span>
+  <span class="n">Failed</span> <span class="o">=</span>    <span class="mi">16</span>                         <span class="c1">#: A failed testcase due to at least one failed assertion.</span>
+
+  <span class="n">Mask</span> <span class="o">=</span> <span class="n">Excluded</span> <span class="o">|</span> <span class="n">Skipped</span> <span class="o">|</span> <span class="n">Weak</span> <span class="o">|</span> <span class="n">Passed</span> <span class="o">|</span> <span class="n">Failed</span>
+
+  <span class="n">Inverted</span> <span class="o">=</span> <span class="mi">128</span>                         <span class="c1">#: To mark inverted results</span>
+  <span class="n">UnexpectedPassed</span> <span class="o">=</span> <span class="n">Failed</span> <span class="o">|</span> <span class="n">Inverted</span>
+  <span class="n">ExpectedFailed</span> <span class="o">=</span>   <span class="n">Passed</span> <span class="o">|</span> <span class="n">Inverted</span>
+
+  <span class="n">Warned</span> <span class="o">=</span>  <span class="mi">1024</span>                         <span class="c1">#: Runtime warning</span>
+  <span class="n">Errored</span> <span class="o">=</span> <span class="mi">2048</span>                         <span class="c1">#: Runtime error (mostly caught exceptions)</span>
+  <span class="n">Aborted</span> <span class="o">=</span> <span class="mi">4096</span>                         <span class="c1">#: Uncaught runtime exception</span>
+
+  <span class="n">SetupError</span> <span class="o">=</span>     <span class="mi">8192</span>                  <span class="c1">#: Preparation / compilation error</span>
+  <span class="n">TearDownError</span> <span class="o">=</span> <span class="mi">16384</span>                  <span class="c1">#: Cleanup error / resource release error</span>
+  <span class="n">Inconsistent</span> <span class="o">=</span> <span class="mi">32768</span>                   <span class="c1">#: Dataset is inconsistent</span>
+
+  <span class="n">Flags</span> <span class="o">=</span> <span class="n">Warned</span> <span class="o">|</span> <span class="n">Errored</span> <span class="o">|</span> <span class="n">Aborted</span> <span class="o">|</span> <span class="n">SetupError</span> <span class="o">|</span> <span class="n">TearDownError</span> <span class="o">|</span> <span class="n">Inconsistent</span>
+</pre></div>
+</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">TestsuiteStatus</span><span class="p">(</span><span class="n">Flag</span><span class="p">):</span>
+<span class="w">  </span><span class="sd">&quot;&quot;&quot;A flag enumeration describing the status of a test suite.&quot;&quot;&quot;</span>
+  <span class="n">Unknown</span> <span class="o">=</span>    <span class="mi">0</span>
+  <span class="n">Excluded</span> <span class="o">=</span>   <span class="mi">1</span>                         <span class="c1">#: Testcase was permanently excluded / disabled</span>
+  <span class="n">Skipped</span> <span class="o">=</span>    <span class="mi">2</span>                         <span class="c1">#: Testcase was temporarily skipped (e.g. based on a condition)</span>
+  <span class="n">Empty</span> <span class="o">=</span>      <span class="mi">4</span>                         <span class="c1">#: No tests in suite</span>
+  <span class="n">Passed</span> <span class="o">=</span>     <span class="mi">8</span>                         <span class="c1">#: Passed testcase, because all assertions succeeded</span>
+  <span class="n">Failed</span> <span class="o">=</span>    <span class="mi">16</span>                         <span class="c1">#: Failed testcase due to failing assertions</span>
+
+  <span class="n">Mask</span> <span class="o">=</span> <span class="n">Excluded</span> <span class="o">|</span> <span class="n">Skipped</span> <span class="o">|</span> <span class="n">Empty</span> <span class="o">|</span> <span class="n">Passed</span> <span class="o">|</span> <span class="n">Failed</span>
+
+  <span class="n">Inverted</span> <span class="o">=</span> <span class="mi">128</span>                         <span class="c1">#: To mark inverted results</span>
+  <span class="n">UnexpectedPassed</span> <span class="o">=</span> <span class="n">Failed</span> <span class="o">|</span> <span class="n">Inverted</span>
+  <span class="n">ExpectedFailed</span> <span class="o">=</span>   <span class="n">Passed</span> <span class="o">|</span> <span class="n">Inverted</span>
+
+  <span class="n">Warned</span> <span class="o">=</span>  <span class="mi">1024</span>                         <span class="c1">#: Runtime warning</span>
+  <span class="n">Errored</span> <span class="o">=</span> <span class="mi">2048</span>                         <span class="c1">#: Runtime error (mostly caught exceptions)</span>
+  <span class="n">Aborted</span> <span class="o">=</span> <span class="mi">4096</span>                         <span class="c1">#: Uncaught runtime exception</span>
+
+  <span class="n">SetupError</span> <span class="o">=</span>     <span class="mi">8192</span>                  <span class="c1">#: Preparation / compilation error</span>
+  <span class="n">TearDownError</span> <span class="o">=</span> <span class="mi">16384</span>                  <span class="c1">#: Cleanup error / resource release error</span>
+
+  <span class="n">Flags</span> <span class="o">=</span> <span class="n">Warned</span> <span class="o">|</span> <span class="n">Errored</span> <span class="o">|</span> <span class="n">Aborted</span> <span class="o">|</span> <span class="n">SetupError</span> <span class="o">|</span> <span class="n">TearDownError</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="testcase">
+<span id="unittest-datamodel-testcase"></span><h3>Testcase<a class="headerlink" href="#testcase" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">Testcase</span></code> is the leaf-element in the test entity hierarchy and describes an
+individual test run. Besides a test case status, it also contains statistics like the start time or the test
+duration. Test cases are grouped by test suites and need to be unique per parent test suite.</p>
+<p>A test case (or its base classes) implements the following properties and methods:</p>
+<dl>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">Parent</span></code></dt><dd><p>The test case has a reference to it’s parent test suite in the hierarchy. By iterating parent references, the
+root element (test suite summary) be be found, which has no parent reference (<code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">Name</span></code></dt><dd><p>The test case has a name. This name must be unique per hierarchy parent, but can exist multiple times in the
+overall test hierarchy.</p>
+<p>In case the data format uses hierarchical names like <code class="docutils literal notranslate"><span class="pre">pyEDAA.Reports.CLI.Application</span></code>, the name is split at
+the separator and multiple hierarchy levels (test suites) are created in the unified data model. To be able to
+recreate such an hierarchical name, <code class="xref py py-class docutils literal notranslate"><span class="pre">TestsuiteKind</span></code> is applied accordingly
+to test suite’s <code class="xref py py-data docutils literal notranslate"><span class="pre">Kind</span></code> field.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">StartTime</span></code></dt><dd><p>The test case stores a time when the individual test run was started. In combination with
+<code class="xref py py-data docutils literal notranslate"><span class="pre">TotalDuration</span></code>, the end time can be calculated. If the start time is
+unknown, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">SetupDuration</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">TestDuration</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">TeardownDuration</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">TotalDuration</span></code></dt><dd><p>The test case has fields to capture the setup duration, test run duration and teardown duration. The sum of all
+durations is provided by total duration.</p>
+<p><code class="code highlight python docutils literal highlight-python"><span class="n">TotalDuration</span> <span class="o">:=</span> <span class="n">SetupDuration</span> <span class="o">+</span> <span class="n">TestDuration</span> <span class="o">+</span> <span class="n">TeardownDuration</span></code></p>
+<p>The <em class="dfn">setup duration</em> is the time spend on setting up a test run. If the setup duration can’t be
+distinguished from the test’s runtime, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The test’s runtime without setup and teardown portions is captured by <em class="dfn">test duration</em>. If the duration is
+unknown, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The <em class="dfn">teardown duration</em> of a test run is the time spend on tearing down a test run. If the teardown
+duration can’t be distinguished from the test’s runtime, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The test case has a field <em class="dfn">total duration</em> to sum up setup duration, test duration and teardown duration.
+If the duration is unknown, this value will be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">WarningCount</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">ErrorCount</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">FatalCount</span></code></dt><dd><p>The test case counts for warnings, errors and fatal errors observed in a test run while the test was executed.</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">__len__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__setitem__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__delitem__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__contains__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code></dt><dd><p>The test case implements a dictionary interface, so arbitrary key-value pairs can be annotated per test entity.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">Status</span></code></dt><dd><p>The overall status of a test case.</p>
+<p>See also: <a class="reference internal" href="#unittest-datamodel-testcasestatus"><span class="std std-ref">Testcase Status</span></a>.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">AssertionCount</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">PassedAssertionCount</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">FailedAssertionCount</span></code></dt><dd><p>The <em class="dfn">assertion count</em> represents the overall number of assertions (checks) in a test case. It can be
+distinguished into <em class="dfn">passed assertions</em> and <em class="dfn">failed assertions</em>. If it can’t be distinguished, set
+passed and failed assertions to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p><code class="code highlight python docutils literal highlight-python"><span class="n">AssertionCount</span> <span class="o">:=</span> <span class="n">PassedAssertionCount</span> <span class="o">+</span> <span class="n">FailedAssertionCount</span></code></p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">Copy()</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">Aggregate()</span></code></dt><dd><p>Aggregate (recalculate) all durations, warnings, errors, assertions, etc.</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">__str__()</span></code></dt><dd><p>tbd</p>
+</dd>
+</dl>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">Testcase</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+      <span class="n">startTime</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">setupDuration</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">testDuration</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">teardownDuration</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">totalDuration</span><span class="p">:</span>  <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">status</span><span class="p">:</span> <span class="n">TestcaseStatus</span> <span class="o">=</span> <span class="n">TestcaseStatus</span><span class="o">.</span><span class="n">Unknown</span><span class="p">,</span>
+      <span class="n">assertionCount</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">failedAssertionCount</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">passedAssertionCount</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">warningCount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">errorCount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">fatalCount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">parent</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="s2">&quot;Testsuite&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+   <span class="p">):</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">Parent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="s2">&quot;Testsuite&quot;</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">Name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">StartTime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">datetime</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">SetupDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TestDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TeardownDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TotalDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">WarningCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">ErrorCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">FatalCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">Status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestcaseStatus</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">AssertionCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">FailedAssertionCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">PassedAssertionCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="nf">Copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Testcase&quot;</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="nf">Aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestcaseAggregateReturnType</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+     <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="testsuite">
+<span id="unittest-datamodel-testsuite"></span><h3>Testsuite<a class="headerlink" href="#testsuite" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">Testsuite</span></code> is a grouping element in the test entity hierarchy and describes
+a group of test runs. Besides a list of test cases and a test suite status, it also contains statistics like the
+start time or the test duration for the group of tests. Test suites are grouped by other test suites or a test
+suite summary and need to be unique per parent test suite.</p>
+<p>A test suite (or its base classes) implements the following properties and methods:</p>
+<dl>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">Parent</span></code></dt><dd><p>The test suite has a reference to it’s parent test entity in the hierarchy. By iterating parent references, the
+root element (test suite summary) be be found, which has no parent reference (<code class="docutils literal notranslate"><span class="pre">None</span></code>).</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">Name</span></code></dt><dd><p>The test suite has a name. This name must be unique per hierarchy parent, but can exist multiple times in the
+overall test hierarchy.</p>
+<p>In case the data format uses hierarchical names like <code class="docutils literal notranslate"><span class="pre">pyEDAA.Reports.CLI.Application</span></code>, the name is split at
+the separator and multiple hierarchy levels (test suites) are created in the unified data model. To be able to
+recreate such an hierarchical name, <code class="xref py py-class docutils literal notranslate"><span class="pre">TestsuiteKind</span></code> is applied accordingly
+to test suite’s <code class="xref py py-data docutils literal notranslate"><span class="pre">Kind</span></code> field.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">StartTime</span></code></dt><dd><p>The test suite stores a time when the first test run was started. In combination with
+<code class="xref py py-data docutils literal notranslate"><span class="pre">TotalDuration</span></code>, the end time can be calculated. If the start time is
+unknown, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">SetupDuration</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">TestDuration</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">TeardownDuration</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">TotalDuration</span></code></dt><dd><p>The test suite has fields to capture the suite’s setup duration, test group run duration and suite’s
+teardown duration. The sum of all durations is provided by total duration.</p>
+<p><code class="code highlight python docutils literal highlight-python"><span class="n">TotalDuration</span> <span class="o">:=</span> <span class="n">SetupDuration</span> <span class="o">+</span> <span class="n">TestDuration</span> <span class="o">+</span> <span class="n">TeardownDuration</span></code></p>
+<p>The <em class="dfn">setup duration</em> is the time spend on setting up a test suite. If the setup duration can’t be
+distinguished from the test group’s runtime, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The test group’s runtime without setup and teardown portions is captured by <em class="dfn">test duration</em>. If the
+duration is unknown, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The <em class="dfn">teardown duration</em> of a test suite is the time spend on tearing down a test suite. If the teardown
+duration can’t be distinguished from the test group’s runtime, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The test suite has a field <em class="dfn">total duration</em> to sum up setup duration, test duration and teardown duration.
+If the duration is unknown, this value will be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">WarningCount</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">ErrorCount</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">FatalCount</span></code></dt><dd><p>The test suite counts for warnings, errors and fatal errors observed in a test suite while the tests were
+executed.</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">__len__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__setitem__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__delitem__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__contains__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code></dt><dd><p>The test suite implements a dictionary interface, so arbitrary key-value pairs can be annotated.</p>
+</dd>
+</dl>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>TestsuiteBase APIs</p>
+</div>
+<dl class="simple">
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">Testcases</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">TestcaseCount</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">AssertionCount</span></code></dt><dd><p>The overall number of assertions (checks) in a test case.</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">Aggregate()</span></code></dt><dd><p>Aggregate (recalculate) all durations, warnings, errors, assertions, etc.</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">Iterate()</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">__str__()</span></code></dt><dd><p>tbd</p>
+</dd>
+</dl>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">Testsuite</span><span class="p">(</span><span class="n">TestsuiteBase</span><span class="p">[</span><span class="n">TestsuiteType</span><span class="p">]):</span>
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+      <span class="n">kind</span><span class="p">:</span> <span class="n">TestsuiteKind</span> <span class="o">=</span> <span class="n">TestsuiteKind</span><span class="o">.</span><span class="n">Logical</span><span class="p">,</span>
+      <span class="n">startTime</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">setupDuration</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">testDuration</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">teardownDuration</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">totalDuration</span><span class="p">:</span>  <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">status</span><span class="p">:</span> <span class="n">TestsuiteStatus</span> <span class="o">=</span> <span class="n">TestsuiteStatus</span><span class="o">.</span><span class="n">Unknown</span><span class="p">,</span>
+      <span class="n">warningCount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">errorCount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">fatalCount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">testsuites</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">TestsuiteType</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">testcases</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="s2">&quot;Testcase&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">parent</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">TestsuiteType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+   <span class="p">):</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">Parent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="s2">&quot;Testsuite&quot;</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">Name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">StartTime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">datetime</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">SetupDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TestDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TeardownDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TotalDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">WarningCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">ErrorCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">FatalCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="c1"># TestsuiteBase API</span>
+
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">Testcases</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Testcase&quot;</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TestcaseCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">AssertionCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="nf">Aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">strict</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestsuiteAggregateReturnType</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="nf">Iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scheme</span><span class="p">:</span> <span class="n">IterationScheme</span> <span class="o">=</span> <span class="n">IterationScheme</span><span class="o">.</span><span class="n">Default</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">TestsuiteType</span><span class="p">,</span> <span class="n">Testcase</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+     <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="testsuitesummary">
+<span id="unittest-datamodel-testsuitesummary"></span><h3>TestsuiteSummary<a class="headerlink" href="#testsuitesummary" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">TestsuiteSummary</span></code> is the root element in the test entity hierarchy and
+describes a group of test suites as well as overall statistics for the whole set of test cases. A test suite
+summary is derived for the same base-class as a test suite, thus they share almost all properties and methods.</p>
+<p>A test suite summary (or its base classes) implements the following properties and methods:</p>
+<dl>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">Parent</span></code></dt><dd><p>The test suite summary has a parent reference, but as the root element in the test entity hierarchy, its always
+<code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">Name</span></code></dt><dd><p>The test suite summary has a name.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">StartTime</span></code></dt><dd><p>The test suite summary stores a time when the first test runs was started. In combination with
+<code class="xref py py-data docutils literal notranslate"><span class="pre">TotalDuration</span></code>, the end time can be calculated. If the start time is
+unknown, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">SetupDuration</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">TestDuration</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">TeardownDuration</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">TotalDuration</span></code></dt><dd><p>The test suite summary has fields to capture the suite summary’s setup duration, overall run duration and
+suite summary’s teardown duration. The sum of all durations is provided by total duration.</p>
+<p><code class="code highlight python docutils literal highlight-python"><span class="n">TotalDuration</span> <span class="o">:=</span> <span class="n">SetupDuration</span> <span class="o">+</span> <span class="n">TestDuration</span> <span class="o">+</span> <span class="n">TeardownDuration</span></code></p>
+<p>The <em class="dfn">setup duration</em> is the time spend on setting up an overall test run. If the setup duration can’t be
+distinguished from the test’s runtimes, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The test suite summary’s runtime without setup and teardown portions is captured by <em class="dfn">test duration</em>. If
+the duration is unknown, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The <em class="dfn">teardown duration</em> of a test suite summary is the time spend on tearing down a test suite summary. If
+the teardown duration can’t be distinguished from the test’s runtimes, set this value to <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The test suite summary has a field <em class="dfn">total duration</em> to sum up setup duration, overall run duration and
+teardown duration. If the duration is unknown, this value will be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">WarningCount</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">ErrorCount</span></code>, <code class="xref py py-data docutils literal notranslate"><span class="pre">FatalCount</span></code></dt><dd><p>The test suite summary counts for warnings, errors and fatal errors observed in a test suite summary while the
+tests were executed.</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">__len__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__getitem__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__setitem__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__delitem__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__contains__()</span></code>, <code class="xref py py-meth docutils literal notranslate"><span class="pre">__iter__()</span></code></dt><dd><p>The test suite summary implements a dictionary interface, so arbitrary key-value pairs can be annotated.</p>
+</dd>
+</dl>
+<div class="admonition-todo admonition" id="id2">
+<p class="admonition-title">Todo</p>
+<p>TestsuiteBase APIs</p>
+</div>
+<dl class="simple">
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">Aggregate()</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">Iterate()</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">__str__()</span></code></dt><dd><p>tbd</p>
+</dd>
+</dl>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">TestsuiteSummary</span><span class="p">(</span><span class="n">TestsuiteBase</span><span class="p">[</span><span class="n">TestsuiteType</span><span class="p">]):</span>
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+      <span class="bp">self</span><span class="p">,</span>
+      <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+      <span class="n">startTime</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">datetime</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">setupDuration</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">testDuration</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">teardownDuration</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">totalDuration</span><span class="p">:</span>  <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">status</span><span class="p">:</span> <span class="n">TestsuiteStatus</span> <span class="o">=</span> <span class="n">TestsuiteStatus</span><span class="o">.</span><span class="n">Unknown</span><span class="p">,</span>
+      <span class="n">warningCount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">errorCount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">fatalCount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="n">testsuites</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="n">TestsuiteType</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+      <span class="n">parent</span><span class="p">:</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">TestsuiteType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+   <span class="p">):</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">Parent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="s2">&quot;Testsuite&quot;</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">Name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">StartTime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">datetime</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">SetupDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TestDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TeardownDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">TotalDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Nullable</span><span class="p">[</span><span class="n">timedelta</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">WarningCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">ErrorCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">FatalCount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="c1"># TestsuiteBase API</span>
+
+   <span class="k">def</span> <span class="nf">Aggregate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TestsuiteAggregateReturnType</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="nf">Iterate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">scheme</span><span class="p">:</span> <span class="n">IterationScheme</span> <span class="o">=</span> <span class="n">IterationScheme</span><span class="o">.</span><span class="n">Default</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Generator</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">TestsuiteType</span><span class="p">,</span> <span class="n">Testcase</span><span class="p">],</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+     <span class="o">...</span>
+
+   <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+     <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="document">
+<span id="unittest-datamodel-document"></span><h3>Document<a class="headerlink" href="#document" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>A <code class="xref py py-class docutils literal notranslate"><span class="pre">Document</span></code> is a mixin-class …</p>
+<dl class="simple">
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">Path</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">AnalysisDuration</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-data docutils literal notranslate"><span class="pre">ModelConversionDuration</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">Analyze()</span></code></dt><dd><p>tbd</p>
+</dd>
+<dt><code class="xref py py-meth docutils literal notranslate"><span class="pre">Convert()</span></code></dt><dd><p>tbd</p>
+</dd>
+</dl>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@export</span>
+<span class="k">class</span> <span class="nc">Document</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ExtendedType</span><span class="p">,</span> <span class="n">mixin</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+   <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">Path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Path</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">AnalysisDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">timedelta</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@readonly</span>
+   <span class="k">def</span> <span class="nf">ModelConversionDuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">timedelta</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@abstractmethod</span>
+   <span class="k">def</span> <span class="nf">Analyze</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+     <span class="o">...</span>
+
+   <span class="nd">@abstractmethod</span>
+   <span class="k">def</span> <span class="nf">Convert</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="specific-data-models">
+<span id="unittest-specificdatamodels"></span><h2>Specific Data Models<a class="headerlink" href="#specific-data-models" title="Link to this heading"></a></h2>
+<section id="junit-data-model">
+<span id="unittest-specificdatamodel-junit"></span><h3>JUnit Data Model<a class="headerlink" href="#junit-data-model" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-specificdatamodel-junit-testcase"><span class="std std-ref">Testcase</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">A <em class="dfn">test case</em> is the leaf-element in the test entity hierarchy and describes an individual test run.
+Test cases are grouped by test classes.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-specificdatamodel-junit-testclass"><span class="std std-ref">Testclass</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">A <em class="dfn">test class</em> is the mid-level element in the test entity hierarchy and describes a group of test
+runs. Test classes are grouped by test suites.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-specificdatamodel-junit-testsuite"><span class="std std-ref">Testsuite</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">A <em class="dfn">test suite</em> is a group of test classes. Test suites are grouped by a test suite summary.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-specificdatamodel-junit-testsuitesummary"><span class="std std-ref">TestsuiteSummary</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">The <em class="dfn">test suite summary</em> is derived from test suite and defines the root of the test suite hierarchy.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-specificdatamodel-junit-document"><span class="std std-ref">Document</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">The <em class="dfn">document</em> is derived from a test suite summary and represents a file containing a test suite
+summary.</p>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="#unittest-specificdatamodel-junit-dialects"><span class="std std-ref">JUnit Dialects</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">The JUnit format is not well defined, thus multiple dialects developed over time.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<pre  class="mermaid">
+        graph TD;
+  doc[Document]
+  sum[Summary]
+  ts1[Testsuite]
+  ts11[Testsuite]
+  ts2[Testsuite]
+
+  tc111[Testclass]
+  tc112[Testclass]
+  tc23[Testclass]
+
+  tc1111[Testcase]
+  tc1112[Testcase]
+  tc1113[Testcase]
+  tc1121[Testcase]
+  tc1122[Testcase]
+  tc231[Testcase]
+  tc232[Testcase]
+  tc233[Testcase]
+
+  doc:::root -.-&gt; sum:::summary
+  sum --&gt; ts1:::suite
+  sum ---&gt; ts2:::suite
+  ts1 --&gt; ts11:::suite
+
+  ts11 --&gt; tc111:::cls
+  ts11 --&gt; tc112:::cls
+  ts2  --&gt; tc23:::cls
+
+  tc111 --&gt; tc1111:::case
+  tc111 --&gt; tc1112:::case
+  tc111 --&gt; tc1113:::case
+  tc112 --&gt; tc1121:::case
+  tc112 --&gt; tc1122:::case
+  tc23 --&gt; tc231:::case
+  tc23 --&gt; tc232:::case
+  tc23 --&gt; tc233:::case
+
+  classDef root fill:#4dc3ff
+  classDef summary fill:#80d4ff
+  classDef suite fill:#b3e6ff
+  classDef cls fill:#ff9966
+  classDef case fill:#eeccff
+    </pre></div>
+</div>
+</div>
+<section id="unittest-specificdatamodel-junit-testcase">
+<span id="id3"></span><h4>Testcase<a class="headerlink" href="#unittest-specificdatamodel-junit-testcase" title="Link to this heading"></a></h4>
+</section>
+<section id="testclass">
+<span id="unittest-specificdatamodel-junit-testclass"></span><h4>Testclass<a class="headerlink" href="#testclass" title="Link to this heading"></a></h4>
+</section>
+<section id="unittest-specificdatamodel-junit-testsuite">
+<span id="id4"></span><h4>Testsuite<a class="headerlink" href="#unittest-specificdatamodel-junit-testsuite" title="Link to this heading"></a></h4>
+</section>
+<section id="unittest-specificdatamodel-junit-testsuitesummary">
+<span id="id5"></span><h4>TestsuiteSummary<a class="headerlink" href="#unittest-specificdatamodel-junit-testsuitesummary" title="Link to this heading"></a></h4>
+</section>
+<section id="unittest-specificdatamodel-junit-document">
+<span id="id6"></span><h4>Document<a class="headerlink" href="#unittest-specificdatamodel-junit-document" title="Link to this heading"></a></h4>
+</section>
+</section>
+<section id="junit-dialects">
+<span id="unittest-specificdatamodel-junit-dialects"></span><h3>JUnit Dialects<a class="headerlink" href="#junit-dialects" title="Link to this heading"></a></h3>
+<p>As the JUnit XML format was not well specified and no XML Schema Definition (XSD) was provided, many variants and
+dialects (and simplifications) were created by the various frameworks emitting JUnit XML files.</p>
+<p class="rubric">JUnit Dialect Comparison</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Any JUnit</p></th>
+<th class="head"><p>Ant + JUnit4</p></th>
+<th class="head"><p>CTest JUnit</p></th>
+<th class="head"><p>GoogleTest JUnit</p></th>
+<th class="head"><p>pyTest JUnit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Root element</p></td>
+<td><p>testsuites</p></td>
+<td><p>testsuite</p></td>
+<td><p>testsuite</p></td>
+<td><p>testsuites</p></td>
+<td><p>testsuites</p></td>
+</tr>
+<tr class="row-odd"><td><p>Supports properties</p></td>
+<td><p>☑</p></td>
+<td><p>☑</p></td>
+<td></td>
+<td><p>⸺</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Testcase status</p></td>
+<td><p>…</p></td>
+<td><p>…</p></td>
+<td><p>more status values</p></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="any-junit">
+<span id="unittest-specificdatamodel-junit-dialect-anyjunit"></span><h4>Any JUnit<a class="headerlink" href="#any-junit" title="Link to this heading"></a></h4>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>The Any JUnit format uses a relaxed XML schema definition aiming to parse many JUnit XML dialects, which use a
+<code class="docutils literal notranslate"><span class="pre">&lt;testsuites&gt;</span></code> root element.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ReadJUnit" for="sd-tab-item-0">
+Reading Any JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AnyJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ConvertToFrom" for="sd-tab-item-1">
+Convert to and from Unified Data Model</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert to unified test data model</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">ToTestsuiteSummary</span><span class="p">()</span>
+
+<span class="c1"># Convert back to a document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;New JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="WriteJUnit" for="sd-tab-item-2">
+Writing Any JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AnyJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ant-junit4">
+<span id="unittest-specificdatamodel-junit-dialect-antjunit4"></span><h4>Ant + JUnit4<a class="headerlink" href="#ant-junit4" title="Link to this heading"></a></h4>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>The original JUnit format created by <a class="reference external" href="https://github.com/apache/ant">Ant</a> for <a class="reference external" href="https://github.com/junit-team/junit4">JUnit4</a>
+uses <code class="docutils literal notranslate"><span class="pre">&lt;testsuite&gt;</span></code> as a root element.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ReadJUnit" for="sd-tab-item-3">
+Reading Ant + JUnit4</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.AntJUnit4</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AntJUnit4-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ConvertToFrom" for="sd-tab-item-4">
+Convert to and from Unified Data Model</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.AntJUnit4</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert to unified test data model</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">ToTestsuiteSummary</span><span class="p">()</span>
+
+<span class="c1"># Convert back to a document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;New JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="WriteJUnit" for="sd-tab-item-5">
+Writing Ant + JUnit4</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.AntJUnit4</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AnyJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ctest-junit">
+<span id="unittest-specificdatamodel-junit-dialect-ctest"></span><h4>CTest JUnit<a class="headerlink" href="#ctest-junit" title="Link to this heading"></a></h4>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>The CTest JUnit format written by <a class="reference external" href="https://github.com/bvdberg/ctest">CTest</a> uses <code class="docutils literal notranslate"><span class="pre">&lt;testsuite&gt;</span></code> as a root
+element.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-6" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ReadJUnit" for="sd-tab-item-6">
+Reading CTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.CTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;CTestJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ConvertToFrom" for="sd-tab-item-7">
+Convert to and from Unified Data Model</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.CTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert to unified test data model</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">ToTestsuiteSummary</span><span class="p">()</span>
+
+<span class="c1"># Convert back to a document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;New JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="WriteJUnit" for="sd-tab-item-8">
+Writing CTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.CTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AnyJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="googletest-junit">
+<span id="unittest-specificdatamodel-junit-dialect-googletest"></span><h4>GoogleTest JUnit<a class="headerlink" href="#googletest-junit" title="Link to this heading"></a></h4>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>The GoogleTest JUnit format written by <a class="reference external" href="https://github.com/google/googletest">GoogleTest</a> (sometimes GTest)
+uses <code class="docutils literal notranslate"><span class="pre">&lt;testsuites&gt;</span></code> as a root element.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ReadJUnit" for="sd-tab-item-9">
+Reading GoogleTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.GoogleTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;GoogleTestJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-10" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ConvertToFrom" for="sd-tab-item-10">
+Convert to and from Unified Data Model</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.GoogleTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert to unified test data model</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">ToTestsuiteSummary</span><span class="p">()</span>
+
+<span class="c1"># Convert back to a document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;New JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-11" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="WriteJUnit" for="sd-tab-item-11">
+Writing GoogleTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.GoogleTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AnyJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="pytest-junit">
+<span id="unittest-specificdatamodel-junit-dialect-pytest"></span><h4>pyTest JUnit<a class="headerlink" href="#pytest-junit" title="Link to this heading"></a></h4>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>The pyTest JUnit format written by <a class="reference external" href="https://github.com/pytest-dev/pytest">pyTest</a> uses <code class="docutils literal notranslate"><span class="pre">&lt;testsuites&gt;</span></code> as a
+root element.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-12" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ReadJUnit" for="sd-tab-item-12">
+Reading pyTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.PyTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;PyTestJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-13" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="ConvertToFrom" for="sd-tab-item-13">
+Convert to and from Unified Data Model</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.PyTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert to unified test data model</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">ToTestsuiteSummary</span><span class="p">()</span>
+
+<span class="c1"># Convert back to a document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;New JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-14" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="WriteJUnit" for="sd-tab-item-14">
+Writing pyTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.PyTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AnyJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="osvvm">
+<span id="unittest-specificdatamodel-osvvm"></span><h3>OSVVM<a class="headerlink" href="#osvvm" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="https://github.com/OSVVM/OSVVM">Open Source VHDL Verification Methodology</a> writes test results as YAML files for its
+internal data model storage. Some YAML files are written by the VHDL code of the verification framework, others are
+written by <a class="reference external" href="https://github.com/OSVVM/OSVVM-Scripts">OSVVM-Scripts</a> as a test runner.</p>
+</section>
+</section>
+<section id="features">
+<span id="unittest-features"></span><h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<section id="create-test-entities">
+<span id="unittest-feature-create"></span><h3>Create test entities<a class="headerlink" href="#create-test-entities" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>The hierarchy of test entities (test cases, test suites and test summaries) can be constructed top-down or
+bottom-up.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-15" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testcase" for="sd-tab-item-15">
+Test Case</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting</span> <span class="kn">import</span> <span class="n">Testsuite</span><span class="p">,</span> <span class="n">Testcase</span>
+
+<span class="c1"># Top-down</span>
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts1&quot;</span><span class="p">)</span>
+
+<span class="n">tc</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">ts</span><span class="p">)</span>
+
+<span class="c1"># Bottom-up</span>
+<span class="n">tc1</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc1&quot;</span><span class="p">)</span>
+<span class="n">tc2</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc2&quot;</span><span class="p">)</span>
+
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts2&quot;</span><span class="p">,</span> <span class="n">testcases</span><span class="o">=</span><span class="p">(</span><span class="n">tc1</span><span class="p">,</span> <span class="n">tc2</span><span class="p">))</span>
+
+<span class="c1"># ts.AddTestcase(...)</span>
+<span class="n">tc3</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc3&quot;</span><span class="p">)</span>
+<span class="n">tc4</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc4&quot;</span><span class="p">)</span>
+
+<span class="n">ts3</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts3&quot;</span><span class="p">)</span>
+<span class="n">ts3</span><span class="o">.</span><span class="n">AddTestcase</span><span class="p">(</span><span class="n">tc3</span><span class="p">)</span>
+<span class="n">ts3</span><span class="o">.</span><span class="n">AddTestcase</span><span class="p">(</span><span class="n">tc4</span><span class="p">)</span>
+
+<span class="c1"># ts.AddTestcases(...)</span>
+<span class="n">tc3</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc3&quot;</span><span class="p">)</span>
+<span class="n">tc4</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc4&quot;</span><span class="p">)</span>
+
+<span class="n">ts3</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts3&quot;</span><span class="p">)</span>
+<span class="n">ts3</span><span class="o">.</span><span class="n">AddTestcases</span><span class="p">((</span><span class="n">tc3</span><span class="p">,</span> <span class="n">tc4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-16" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testsuite" for="sd-tab-item-16">
+Test Suite</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting</span> <span class="kn">import</span> <span class="n">Testsuite</span><span class="p">,</span> <span class="n">TestsuiteSummary</span>
+
+<span class="c1"># Top-down</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts&quot;</span><span class="p">)</span>
+
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts1&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">tss</span><span class="p">)</span>
+
+<span class="c1"># Bottom-up</span>
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts2&quot;</span><span class="p">)</span>
+<span class="n">ts3</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts3&quot;</span><span class="p">)</span>
+
+<span class="n">ts4</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts4&quot;</span><span class="p">,</span> <span class="n">testsuites</span><span class="o">=</span><span class="p">(</span><span class="n">ts2</span><span class="p">,</span> <span class="n">ts3</span><span class="p">))</span>
+
+<span class="c1"># ts.AddTestsuite(...)</span>
+<span class="n">ts5</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;ts5&quot;</span><span class="p">)</span>
+<span class="n">ts6</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;ts6&quot;</span><span class="p">)</span>
+
+<span class="n">ts7</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts7&quot;</span><span class="p">)</span>
+<span class="n">ts7</span><span class="o">.</span><span class="n">AddTestsuite</span><span class="p">(</span><span class="n">ts5</span><span class="p">)</span>
+<span class="n">ts7</span><span class="o">.</span><span class="n">AddTestsuite</span><span class="p">(</span><span class="n">ts6</span><span class="p">)</span>
+
+<span class="c1"># ts.AddTestsuites(...)</span>
+<span class="n">ts8</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;ts8&quot;</span><span class="p">)</span>
+<span class="n">ts9</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;ts9&quot;</span><span class="p">)</span>
+
+<span class="n">ts10</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts10&quot;</span><span class="p">)</span>
+<span class="n">ts10</span><span class="o">.</span><span class="n">AddTestsuites</span><span class="p">((</span><span class="n">ts8</span><span class="p">,</span> <span class="n">ts9</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-17" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="TestsuiteSummary" for="sd-tab-item-17">
+Test Suite Summary</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting</span> <span class="kn">import</span> <span class="n">Testsuite</span><span class="p">,</span> <span class="n">TestsuiteSummary</span>
+
+<span class="c1"># Top-down</span>
+
+<span class="c1"># Bottom-up</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="reading-unittest-reports">
+<span id="unittest-feature-read"></span><h3>Reading unittest reports<a class="headerlink" href="#reading-unittest-reports" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>A JUnit XML test report summary file can be read by creating an instance of the <code class="xref py py-class docutils literal notranslate"><span class="pre">Document</span></code>
+class. Because JUnit has so many dialects, a derived subclass for the dialect might be required. By choosing the
+right Document class, also the XML schema for XML schema validation gets pre-selected.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-18" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="AnyJUnit" for="sd-tab-item-18">
+Any JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AnyJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-19" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="AntJUnit4" for="sd-tab-item-19">
+Ant + JUnit4</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.AntJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AntJUnit4-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-20" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="CTestJUnit" for="sd-tab-item-20">
+CTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.CTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;CTest-JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-21" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="GTestJUnit" for="sd-tab-item-21">
+GoogleTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.GoogleTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;GoogleTest-JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-22" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="pyTestJUnit" for="sd-tab-item-22">
+pyTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.PyTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;pyTest-JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="converting-unittest-reports">
+<span id="unittest-feature-convert"></span><h3>Converting unittest reports<a class="headerlink" href="#converting-unittest-reports" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>Any JUnit dialect specific data model can be converted to the generic hierarchy of test entities.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This conversion is identical for all derived dialects.</p>
+</div>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-23" name="sd-tab-set-7" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Document" for="sd-tab-item-23">
+Document</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Read from XML file</span>
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+
+<span class="c1"># Convert to unified test data model</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">ToTestsuiteSummary</span><span class="p">()</span>
+
+<span class="c1"># Convert to a tree</span>
+<span class="n">rootNode</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">ToTree</span><span class="p">()</span>
+
+<span class="c1"># Convert back to a document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;New JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="annotations">
+<span id="unittest-feature-annotation"></span><h3>Annotations<a class="headerlink" href="#annotations" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>Every test entity can be annotated with arbitrary key-value pairs.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-24" name="sd-tab-set-8" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testcase" for="sd-tab-item-24">
+Testcase</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add annotate a key-value pair</span>
+<span class="n">testcase</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="c1"># Update existing annotation with new value</span>
+<span class="n">testcase</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newValue</span>
+
+<span class="c1"># Check if key exists</span>
+<span class="k">if</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">testcase</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="c1"># Access annoation by key</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">testcase</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Get number of annotations</span>
+<span class="n">annotationCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testcase</span><span class="p">)</span>
+
+<span class="c1"># Delete annotation</span>
+<span class="k">del</span> <span class="n">testcase</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Iterate annotations</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">testcases</span><span class="p">:</span>
+   <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-25" name="sd-tab-set-8" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testsuite" for="sd-tab-item-25">
+Testsuite</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add annotate a key-value pair</span>
+<span class="n">testsuite</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="c1"># Update existing annotation with new value</span>
+<span class="n">testsuite</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newValue</span>
+
+<span class="c1"># Check if key exists</span>
+<span class="k">if</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">testsuite</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="c1"># Access annoation by key</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">testsuite</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Get number of annotations</span>
+<span class="n">annotationCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testsuite</span><span class="p">)</span>
+
+<span class="c1"># Delete annotation</span>
+<span class="k">del</span> <span class="n">testsuite</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Iterate annotations</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">testsuite</span><span class="p">:</span>
+   <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-26" name="sd-tab-set-8" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="TestsuiteSummary" for="sd-tab-item-26">
+TestsuiteSummary</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add annotate a key-value pair</span>
+<span class="n">testsuiteSummary</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="c1"># Update existing annotation with new value</span>
+<span class="n">testsuiteSummary</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newValue</span>
+
+<span class="c1"># Check if key exists</span>
+<span class="k">if</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">testsuiteSummary</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="c1"># Access annoation by key</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">testsuiteSummary</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Get number of annotations</span>
+<span class="n">annotationCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testsuiteSummary</span><span class="p">)</span>
+
+<span class="c1"># Delete annotation</span>
+<span class="k">del</span> <span class="n">testsuiteSummary</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Iterate annotations</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">testsuiteSummary</span><span class="p">:</span>
+   <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="merging-unittest-reports">
+<span id="unittest-feature-merge"></span><h3>Merging unittest reports<a class="headerlink" href="#merging-unittest-reports" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>add description here</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-27" name="sd-tab-set-9" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testcase" for="sd-tab-item-27">
+Testcase</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="concatenate-unittest-reports">
+<span id="unittest-feature-concat"></span><h3>Concatenate unittest reports<a class="headerlink" href="#concatenate-unittest-reports" title="Link to this heading"></a></h3>
+<div class="admonition-todo admonition" id="id7">
+<p class="admonition-title">Todo</p>
+<p>Planned feature.</p>
+</div>
+</section>
+<section id="transforming-the-reports-hierarchy">
+<span id="unittest-feature-transform"></span><h3>Transforming the reports’ hierarchy<a class="headerlink" href="#transforming-the-reports-hierarchy" title="Link to this heading"></a></h3>
+<section id="pytest-specific-transformations">
+<span id="unittest-feature-transform-pytest"></span><h4>pytest specific transformations<a class="headerlink" href="#pytest-specific-transformations" title="Link to this heading"></a></h4>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>add description here</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-28" name="sd-tab-set-10" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testcase" for="sd-tab-item-28">
+Testcase</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="writing-unittest-reports">
+<span id="unittest-feature-write"></span><h3>Writing unittest reports<a class="headerlink" href="#writing-unittest-reports" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>A test suite summary can be converted to a document of any JUnit dialect. Internally a deep-copy is created to
+convert from a hierarchy of the unified test entities to a hierarchy of specific test entities (e.g. JUnit
+entities).</p>
+<p>When the document was created, it can be written to disk.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-29" name="sd-tab-set-11" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="AnyJUnit" for="sd-tab-item-29">
+Any JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-30" name="sd-tab-set-11" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="AntJUnit4" for="sd-tab-item-30">
+Ant + JUnit4</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.AntJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-31" name="sd-tab-set-11" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="CTestJUnit" for="sd-tab-item-31">
+CTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.CTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-32" name="sd-tab-set-11" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="GTestJUnit" for="sd-tab-item-32">
+GoogleTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.GoogleTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-33" name="sd-tab-set-11" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="pyTestJUnit" for="sd-tab-item-33">
+pyTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.PyTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="command-line-tool">
+<span id="unittest-cli"></span><h2>Command Line Tool<a class="headerlink" href="#command-line-tool" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyedaa-reports<span class="w"> </span>unittest<span class="w"> </span>--input<span class="o">=</span>Ant-JUnit:data/JUnit.xml
+</pre></div>
+</div>
+</section>
+<section id="file-formats">
+<span id="unittest-fileformats"></span><h2>File Formats<a class="headerlink" href="#file-formats" title="Link to this heading"></a></h2>
+<p>Unittest summary reports can be stored in various file formats. Usually these files are XML based. Due to missing
+(clear) specifications and XML schema definitions, some file formats have developed dialects. Either because the
+specification was unclear/not existing or because the format was specific for a single programming language, so tools
+added extensions or misused XML attributes instead of designing their own file format.</p>
+<section id="ant-and-junit-4-xml">
+<span id="unittest-fileformats-antjunit4"></span><h3>Ant and JUnit 4 XML<a class="headerlink" href="#ant-and-junit-4-xml" title="Link to this heading"></a></h3>
+<p>The so-called JUnit XML format was defined by Ant when running JUnit4 test suites. Because the format was not specified
+by JUnit4, many dialects spread out. Many tools and test frameworks have minor or major differences compared to the
+original format. While some modifications seam logical additions or adjustments to the needs of the respective
+framework, others undermine the ideas and intents of the data format.</p>
+<p>Many issues arise because the <a class="reference internal" href="#unittest-specificdatamodel-junit-dialect-antjunit4"><span class="std std-ref">Ant + JUnit4</span></a> format is
+specific to unit testing with Java. Other languages and frameworks were lazy and didn’t derive their own format, but
+rather stuffed their language constructs into the concepts and limitations of the Ant + JUnit4 XML format.</p>
+<p class="rubric">JUnit Dialects</p>
+<ul class="simple">
+<li><p>🚧 Bamboo JUnit (planned)</p></li>
+<li><p>✅ <a class="reference internal" href="#unittest-specificdatamodel-junit-dialect-ctest"><span class="std std-ref">CTest JUnit format</span></a></p></li>
+<li><p>✅ <a class="reference internal" href="#unittest-specificdatamodel-junit-dialect-googletest"><span class="std std-ref">GoogleTest JUnit format</span></a></p></li>
+<li><p>🚧 Jenkins JUnit (planned)</p></li>
+<li><p>✅ <a class="reference internal" href="#unittest-specificdatamodel-junit-dialect-pytest"><span class="std std-ref">pyTest JUnit format</span></a></p></li>
+</ul>
+</section>
+<section id="junit-5-xml">
+<span id="unittest-fileformats-junit5"></span><h3>JUnit 5 XML<a class="headerlink" href="#junit-5-xml" title="Link to this heading"></a></h3>
+<p>JUnit5 uses a new format called <a class="reference internal" href="#unittest-fileformats-otr"><span class="std std-ref">Open Test Reporting</span></a> (see the following section for details). This format
+isn’t specific to Java (packages, classes, methods, …), but describes a generic data model. Of cause an extension for
+Java specifics is provided too.</p>
+</section>
+<section id="open-test-reporting">
+<span id="unittest-fileformats-otr"></span><h3>Open Test Reporting<a class="headerlink" href="#open-test-reporting" title="Link to this heading"></a></h3>
+<p>The <a class="reference external" href="https://github.com/ota4j-team">Open Test Alliance</a> created a new format called
+<a class="reference external" href="https://github.com/ota4j-team/open-test-reporting">Open Test Reporting</a> (OTR) to overcome the shortcommings of a
+missing file format for JUnit5 as well as the problems of Ant + JUnit4.</p>
+<p>OTR defines a structure of test groups and tests, but no specifics of a certain programming languge. The logical
+structure of tests and test groups is decoupled from language specifics like namespaces, packages or classes hosting the
+individual tests.</p>
+</section>
+<section id="osvvm-yaml">
+<span id="unittest-fileformats-osvvm"></span><h3>OSVVM YAML<a class="headerlink" href="#osvvm-yaml" title="Link to this heading"></a></h3>
+<p>The <a class="reference external" href="https://github.com/OSVVM">Open Source VHDL Verification Methodology (OSVVM)</a> defines its own test report format
+in YAML. While OSVVM is able to convert its own YAML files to JUnit XML files, it’s recommended to use the YAML files as
+data source, because these contain additional information, which can’t be expressed with JUnit XML.</p>
+<p>The YAML files are created when OSVVM-based testbenches are executed with OSVVM’s embedded TCL scripting environment
+<a class="reference external" href="https://github.com/OSVVM/OSVVM-Scripts">OSVVM-Scripts</a>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>YAML was chosen instead of JSON or XML, because a YAML document isn’t corrupted in case of a runtime error. The
+document might be incomplete (content), but not corrupted (structural). Such a scenario is possible if a VHDL
+simulator stops execution, then the document structure can’t be finalized.</p>
+</div>
+</section>
+</section>
+<section id="frameworks-tools">
+<span id="unittest-tools"></span><h2>Frameworks / Tools<a class="headerlink" href="#frameworks-tools" title="Link to this heading"></a></h2>
+<section id="ctest">
+<span id="unittest-tool-ctest"></span><h3>CTest<a class="headerlink" href="#ctest" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/bvdberg/ctest">https://github.com/bvdberg/ctest</a></p></li>
+</ul>
+</section>
+<section id="googletest-gtest">
+<span id="unittest-tool-googletest"></span><h3>GoogleTest (gtest)<a class="headerlink" href="#googletest-gtest" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/google/googletest">https://github.com/google/googletest</a></p></li>
+</ul>
+</section>
+<section id="junit4">
+<span id="unittest-tool-junit4"></span><h3>JUnit4<a class="headerlink" href="#junit4" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/apache/ant">https://github.com/apache/ant</a></p></li>
+<li><p><a class="reference external" href="https://github.com/junit-team/junit4">https://github.com/junit-team/junit4</a></p></li>
+</ul>
+</section>
+<section id="junit5">
+<span id="unittest-tool-junit5"></span><h3>JUnit5<a class="headerlink" href="#junit5" title="Link to this heading"></a></h3>
+</section>
+<section id="unittest-tool-osvvm">
+<span id="id8"></span><h3>OSVVM<a class="headerlink" href="#unittest-tool-osvvm" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/OSVVM/OSVVM">https://github.com/OSVVM/OSVVM</a></p></li>
+<li><p><a class="reference external" href="https://github.com/OSVVM/OSVVM-Scripts">https://github.com/OSVVM/OSVVM-Scripts</a></p></li>
+</ul>
+</section>
+<section id="pytest">
+<span id="unittest-tool-pytest"></span><h3>pytest<a class="headerlink" href="#pytest" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/pytest-dev/pytest">https://github.com/pytest-dev/pytest</a></p></li>
+</ul>
+</section>
+<section id="vunit">
+<span id="unittest-tool-vunit"></span><h3>VUnit<a class="headerlink" href="#vunit" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/VUnit/vunit">https://github.com/VUnit/vunit</a></p></li>
+</ul>
+</section>
+</section>
+<section id="consumers">
+<span id="unittest-consumers"></span><h2>Consumers<a class="headerlink" href="#consumers" title="Link to this heading"></a></h2>
+<section id="gitlab">
+<span id="unittest-consumer-gitlab"></span><h3>GitLab<a class="headerlink" href="#gitlab" title="Link to this heading"></a></h3>
+</section>
+<section id="jenkins">
+<span id="unittest-consumer-jenkins"></span><h3>Jenkins<a class="headerlink" href="#jenkins" title="Link to this heading"></a></h3>
+</section>
+<section id="dorney-github-action">
+<span id="unittest-consumer-dorney"></span><h3>Dorney (GitHub Action)<a class="headerlink" href="#dorney-github-action" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/dorny/test-reporter">https://github.com/dorny/test-reporter</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../DocCoverage/index.html" class="btn btn-neutral float-left" title="Documentation Coverage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Logging/index.html" class="btn btn-neutral float-right" title="EDA Tool Logs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2024, Electronic Design Automation Abstraction (EDA²).
+      <span class="lastupdated">Last updated on 09.11.2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

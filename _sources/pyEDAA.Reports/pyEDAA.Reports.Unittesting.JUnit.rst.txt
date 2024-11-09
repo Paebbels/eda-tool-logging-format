@@ -1,0 +1,16 @@
+.. # Template created by Patrick Lehmann
+
+Python Class Reference
+######################
+
+Reference of all packages and modules:
+
+.. automodule:: pyEDAA.Reports.Unittesting.JUnit
+
+.. toctree::
+   :maxdepth: 1
+
+   pyEDAA.Reports.Unittesting.JUnit.AntJUnit4
+   pyEDAA.Reports.Unittesting.JUnit.CTestJUnit
+   pyEDAA.Reports.Unittesting.JUnit.GoogleTestJUnit
+   pyEDAA.Reports.Unittesting.JUnit.PyTestJUnit

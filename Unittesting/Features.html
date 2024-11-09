@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Features &mdash; pyEDAA.Reports 0.14.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=77553476" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-reports.e44b1595f1e09d5e109d001839ba3f42.css?v=0b41afa8" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/override.css?v=6943e0d8" />
+
+  
+    <link rel="shortcut icon" href="../_static/favicon.svg"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=0dc20415"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html">
+            
+              <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="https://edaa-org.github.io/">Used as a layer of EDA² ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Dependency.html">Dependency</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Report Formats</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CodeCoverage/index.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DocCoverage/index.html">Documentation Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Unittesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Logging/index.html">EDA Tool Logs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References and Reports</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../CommandLineInterface.html">Command Line Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pyEDAA.Reports/pyEDAA.Reports.html">Python Class Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reports/unittests.html">Unittest Summary Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reports/coverage/index.html">Code Coverage Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reports/doccoverage.html">Doc. Coverage Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reports/typing/index.html">Static Type Check Report ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../py-modindex.html">Python Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TODO.html">TODOs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Old Content</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../old/Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/FunctionalCoverage.html">Functional coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/LineCoverage.html">Line coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/Resources.html">Synthesis and implementation results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/RichLogging.html">Semantic/rich logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/Tracking.html">Tracking requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../old/Frontends.html">Frontends</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">pyEDAA.Reports</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Features</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Unittesting/Features.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style type="text/css">
+  span.bolditalic {font-weight: bold; font-style: italic; }
+  span.underline {text-decoration: underline; }
+  span.strike {text-decoration: line-through; }
+  span.xlarge {font-size: x-large; }
+  span.colorred {color: #CC0000; }
+  span.colorgreen {color: #009933; }
+  span.colorblue {color: #0066FF; }
+  span.colorpurple {color: #9900CC; }
+</style><section id="features">
+<span id="unittest-features"></span><h1>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h1>
+<section id="create-test-entities">
+<span id="unittest-feature-create"></span><h2>Create test entities<a class="headerlink" href="#create-test-entities" title="Link to this heading"></a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>The hierarchy of test entities (test cases, test suites and test summaries) can be constructed top-down or
+bottom-up.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testcase" for="sd-tab-item-0">
+Test Case</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting</span> <span class="kn">import</span> <span class="n">Testsuite</span><span class="p">,</span> <span class="n">Testcase</span>
+
+<span class="c1"># Top-down</span>
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts1&quot;</span><span class="p">)</span>
+
+<span class="n">tc</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">ts</span><span class="p">)</span>
+
+<span class="c1"># Bottom-up</span>
+<span class="n">tc1</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc1&quot;</span><span class="p">)</span>
+<span class="n">tc2</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc2&quot;</span><span class="p">)</span>
+
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts2&quot;</span><span class="p">,</span> <span class="n">testcases</span><span class="o">=</span><span class="p">(</span><span class="n">tc1</span><span class="p">,</span> <span class="n">tc2</span><span class="p">))</span>
+
+<span class="c1"># ts.AddTestcase(...)</span>
+<span class="n">tc3</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc3&quot;</span><span class="p">)</span>
+<span class="n">tc4</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc4&quot;</span><span class="p">)</span>
+
+<span class="n">ts3</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts3&quot;</span><span class="p">)</span>
+<span class="n">ts3</span><span class="o">.</span><span class="n">AddTestcase</span><span class="p">(</span><span class="n">tc3</span><span class="p">)</span>
+<span class="n">ts3</span><span class="o">.</span><span class="n">AddTestcase</span><span class="p">(</span><span class="n">tc4</span><span class="p">)</span>
+
+<span class="c1"># ts.AddTestcases(...)</span>
+<span class="n">tc3</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc3&quot;</span><span class="p">)</span>
+<span class="n">tc4</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;tc4&quot;</span><span class="p">)</span>
+
+<span class="n">ts3</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts3&quot;</span><span class="p">)</span>
+<span class="n">ts3</span><span class="o">.</span><span class="n">AddTestcases</span><span class="p">((</span><span class="n">tc3</span><span class="p">,</span> <span class="n">tc4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testsuite" for="sd-tab-item-1">
+Test Suite</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting</span> <span class="kn">import</span> <span class="n">Testsuite</span><span class="p">,</span> <span class="n">TestsuiteSummary</span>
+
+<span class="c1"># Top-down</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts&quot;</span><span class="p">)</span>
+
+<span class="n">ts1</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts1&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">tss</span><span class="p">)</span>
+
+<span class="c1"># Bottom-up</span>
+<span class="n">ts2</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts2&quot;</span><span class="p">)</span>
+<span class="n">ts3</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts3&quot;</span><span class="p">)</span>
+
+<span class="n">ts4</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts4&quot;</span><span class="p">,</span> <span class="n">testsuites</span><span class="o">=</span><span class="p">(</span><span class="n">ts2</span><span class="p">,</span> <span class="n">ts3</span><span class="p">))</span>
+
+<span class="c1"># ts.AddTestsuite(...)</span>
+<span class="n">ts5</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;ts5&quot;</span><span class="p">)</span>
+<span class="n">ts6</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;ts6&quot;</span><span class="p">)</span>
+
+<span class="n">ts7</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts7&quot;</span><span class="p">)</span>
+<span class="n">ts7</span><span class="o">.</span><span class="n">AddTestsuite</span><span class="p">(</span><span class="n">ts5</span><span class="p">)</span>
+<span class="n">ts7</span><span class="o">.</span><span class="n">AddTestsuite</span><span class="p">(</span><span class="n">ts6</span><span class="p">)</span>
+
+<span class="c1"># ts.AddTestsuites(...)</span>
+<span class="n">ts8</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;ts8&quot;</span><span class="p">)</span>
+<span class="n">ts9</span> <span class="o">=</span> <span class="n">Testcase</span><span class="p">(</span><span class="s2">&quot;ts9&quot;</span><span class="p">)</span>
+
+<span class="n">ts10</span> <span class="o">=</span> <span class="n">Testsuite</span><span class="p">(</span><span class="s2">&quot;ts10&quot;</span><span class="p">)</span>
+<span class="n">ts10</span><span class="o">.</span><span class="n">AddTestsuites</span><span class="p">((</span><span class="n">ts8</span><span class="p">,</span> <span class="n">ts9</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="TestsuiteSummary" for="sd-tab-item-2">
+Test Suite Summary</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting</span> <span class="kn">import</span> <span class="n">Testsuite</span><span class="p">,</span> <span class="n">TestsuiteSummary</span>
+
+<span class="c1"># Top-down</span>
+
+<span class="c1"># Bottom-up</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="reading-unittest-reports">
+<span id="unittest-feature-read"></span><h2>Reading unittest reports<a class="headerlink" href="#reading-unittest-reports" title="Link to this heading"></a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>A JUnit XML test report summary file can be read by creating an instance of the <code class="xref py py-class docutils literal notranslate"><span class="pre">Document</span></code>
+class. Because JUnit has so many dialects, a derived subclass for the dialect might be required. By choosing the
+right Document class, also the XML schema for XML schema validation gets pre-selected.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-3" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="AnyJUnit" for="sd-tab-item-3">
+Any JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AnyJUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-4" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="AntJUnit4" for="sd-tab-item-4">
+Ant + JUnit4</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.AntJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;AntJUnit4-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="CTestJUnit" for="sd-tab-item-5">
+CTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.CTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;CTest-JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-6" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="GTestJUnit" for="sd-tab-item-6">
+GoogleTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.GoogleTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;GoogleTest-JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-7" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="pyTestJUnit" for="sd-tab-item-7">
+pyTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.PyTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;pyTest-JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="converting-unittest-reports">
+<span id="unittest-feature-convert"></span><h2>Converting unittest reports<a class="headerlink" href="#converting-unittest-reports" title="Link to this heading"></a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>Any JUnit dialect specific data model can be converted to the generic hierarchy of test entities.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This conversion is identical for all derived dialects.</p>
+</div>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Document" for="sd-tab-item-8">
+Document</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Read from XML file</span>
+<span class="n">xmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="k">try</span><span class="p">:</span>
+  <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">xmlReport</span><span class="p">,</span> <span class="n">parse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+
+<span class="c1"># Convert to unified test data model</span>
+<span class="n">summary</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">ToTestsuiteSummary</span><span class="p">()</span>
+
+<span class="c1"># Convert to a tree</span>
+<span class="n">rootNode</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">ToTree</span><span class="p">()</span>
+
+<span class="c1"># Convert back to a document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;New JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="annotations">
+<span id="unittest-feature-annotation"></span><h2>Annotations<a class="headerlink" href="#annotations" title="Link to this heading"></a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>Every test entity can be annotated with arbitrary key-value pairs.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testcase" for="sd-tab-item-9">
+Testcase</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add annotate a key-value pair</span>
+<span class="n">testcase</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="c1"># Update existing annotation with new value</span>
+<span class="n">testcase</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newValue</span>
+
+<span class="c1"># Check if key exists</span>
+<span class="k">if</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">testcase</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="c1"># Access annoation by key</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">testcase</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Get number of annotations</span>
+<span class="n">annotationCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testcase</span><span class="p">)</span>
+
+<span class="c1"># Delete annotation</span>
+<span class="k">del</span> <span class="n">testcase</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Iterate annotations</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">testcases</span><span class="p">:</span>
+   <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-10" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testsuite" for="sd-tab-item-10">
+Testsuite</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add annotate a key-value pair</span>
+<span class="n">testsuite</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="c1"># Update existing annotation with new value</span>
+<span class="n">testsuite</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newValue</span>
+
+<span class="c1"># Check if key exists</span>
+<span class="k">if</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">testsuite</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="c1"># Access annoation by key</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">testsuite</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Get number of annotations</span>
+<span class="n">annotationCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testsuite</span><span class="p">)</span>
+
+<span class="c1"># Delete annotation</span>
+<span class="k">del</span> <span class="n">testsuite</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Iterate annotations</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">testsuite</span><span class="p">:</span>
+   <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-11" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="TestsuiteSummary" for="sd-tab-item-11">
+TestsuiteSummary</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add annotate a key-value pair</span>
+<span class="n">testsuiteSummary</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+<span class="c1"># Update existing annotation with new value</span>
+<span class="n">testsuiteSummary</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">newValue</span>
+
+<span class="c1"># Check if key exists</span>
+<span class="k">if</span> <span class="s2">&quot;key&quot;</span> <span class="ow">in</span> <span class="n">testsuiteSummary</span><span class="p">:</span>
+  <span class="k">pass</span>
+
+<span class="c1"># Access annoation by key</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">testsuiteSummary</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Get number of annotations</span>
+<span class="n">annotationCount</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">testsuiteSummary</span><span class="p">)</span>
+
+<span class="c1"># Delete annotation</span>
+<span class="k">del</span> <span class="n">testsuiteSummary</span><span class="p">[</span><span class="s2">&quot;key&quot;</span><span class="p">]</span>
+
+<span class="c1"># Iterate annotations</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">testsuiteSummary</span><span class="p">:</span>
+   <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="merging-unittest-reports">
+<span id="unittest-feature-merge"></span><h2>Merging unittest reports<a class="headerlink" href="#merging-unittest-reports" title="Link to this heading"></a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>add description here</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-12" name="sd-tab-set-4" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testcase" for="sd-tab-item-12">
+Testcase</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="concatenate-unittest-reports">
+<span id="unittest-feature-concat"></span><h2>Concatenate unittest reports<a class="headerlink" href="#concatenate-unittest-reports" title="Link to this heading"></a></h2>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<p>Planned feature.</p>
+</div>
+</section>
+<section id="transforming-the-reports-hierarchy">
+<span id="unittest-feature-transform"></span><h2>Transforming the reports’ hierarchy<a class="headerlink" href="#transforming-the-reports-hierarchy" title="Link to this heading"></a></h2>
+<section id="pytest-specific-transformations">
+<span id="unittest-feature-transform-pytest"></span><h3>pytest specific transformations<a class="headerlink" href="#pytest-specific-transformations" title="Link to this heading"></a></h3>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>add description here</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-13" name="sd-tab-set-5" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="Testcase" for="sd-tab-item-13">
+Testcase</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add code here</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="writing-unittest-reports">
+<span id="unittest-feature-write"></span><h2>Writing unittest reports<a class="headerlink" href="#writing-unittest-reports" title="Link to this heading"></a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-2 sd-row-cols-xs-2 sd-row-cols-sm-2 sd-row-cols-md-2 sd-row-cols-lg-2 docutils">
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<p>A test suite summary can be converted to a document of any JUnit dialect. Internally a deep-copy is created to
+convert from a hierarchy of the unified test entities to a hierarchy of specific test entities (e.g. JUnit
+entities).</p>
+<p>When the document was created, it can be written to disk.</p>
+</div>
+<div class="sd-col sd-d-flex-column sd-col-6 sd-col-xs-6 sd-col-sm-6 sd-col-md-6 sd-col-lg-6 docutils">
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-14" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="AnyJUnit" for="sd-tab-item-14">
+Any JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-15" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="AntJUnit4" for="sd-tab-item-15">
+Ant + JUnit4</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.AntJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-16" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="CTestJUnit" for="sd-tab-item-16">
+CTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.CTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-17" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="GTestJUnit" for="sd-tab-item-17">
+GoogleTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.GoogleTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-18" name="sd-tab-set-6" type="radio">
+<label class="sd-tab-label" data-sync-group="tab" data-sync-id="pyTestJUnit" for="sd-tab-item-18">
+pyTest JUnit</label><div class="sd-tab-content docutils">
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pyEDAA.Reports.Unittesting.JUnit.PyTestJUnit</span> <span class="kn">import</span> <span class="n">Document</span>
+
+<span class="c1"># Convert a TestsuiteSummary back to a Document</span>
+<span class="n">newXmlReport</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;JUnit-Report.xml&quot;</span><span class="p">)</span>
+<span class="n">newDoc</span> <span class="o">=</span> <span class="n">Document</span><span class="o">.</span><span class="n">FromTestsuiteSummary</span><span class="p">(</span><span class="n">newXmlReport</span><span class="p">,</span> <span class="n">summary</span><span class="p">)</span>
+
+<span class="c1"># Write to XML file</span>
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">newDoc</span><span class="o">.</span><span class="n">Write</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">UnittestException</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+  <span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2024, Electronic Design Automation Abstraction (EDA²).
+      <span class="lastupdated">Last updated on 09.11.2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

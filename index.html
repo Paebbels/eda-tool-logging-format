@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The pyEDAA.Reports Documentation &mdash; pyEDAA.Reports 0.14.2 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=77553476" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-reports.e44b1595f1e09d5e109d001839ba3f42.css?v=0b41afa8" />
+      <link rel="stylesheet" type="text/css" href="_static/css/override.css?v=6943e0d8" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.svg"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=0dc20415"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation/Updates" href="Installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#">
+            
+              <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference external" href="https://edaa-org.github.io/">Used as a layer of EDA² ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Introduction</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Installation.html">Installation/Updates</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Dependency.html">Dependency</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Report Formats</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CodeCoverage/index.html">Code Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DocCoverage/index.html">Documentation Coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Unittesting/index.html">Unittesting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Logging/index.html">EDA Tool Logs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">References and Reports</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="CommandLineInterface.html">Command Line Interfaces</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pyEDAA.Reports/pyEDAA.Reports.html">Python Class Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reports/unittests.html">Unittest Summary Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reports/coverage/index.html">Code Coverage Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reports/doccoverage.html">Doc. Coverage Report</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reports/typing/index.html">Static Type Check Report ➚</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="License.html">Apache License 2.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Doc-License.html">Creative Commons Attribution 4.0 International</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="genindex.html">Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="py-modindex.html">Python Module Index</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TODO.html">TODOs</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Old Content</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="old/Introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="old/FunctionalCoverage.html">Functional coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="old/LineCoverage.html">Line coverage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="old/Resources.html">Synthesis and implementation results</a></li>
+<li class="toctree-l1"><a class="reference internal" href="old/RichLogging.html">Semantic/rich logging</a></li>
+<li class="toctree-l1"><a class="reference internal" href="old/Tracking.html">Tracking requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="old/Frontends.html">Frontends</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">pyEDAA.Reports</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">The pyEDAA.Reports Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <style type="text/css">
+  span.bolditalic {font-weight: bold; font-style: italic; }
+  span.underline {text-decoration: underline; }
+  span.strike {text-decoration: line-through; }
+  span.xlarge {font-size: x-large; }
+  span.colorred {color: #CC0000; }
+  span.colorgreen {color: #009933; }
+  span.colorblue {color: #0066FF; }
+  span.colorpurple {color: #9900CC; }
+</style><a class="reference external image-reference" href="https://GitHub.com/edaa-org/pyEDAA.Reports"><img alt="_images/logo.svg" class="align-center" src="_images/logo.svg" style="height: 90px;" />
+</a>
+<br><div class="line-block">
+<div class="line"><a class="reference external" href="https://GitHub.com/edaa-org/pyEDAA.Reports"><img alt="Sourcecode on GitHub" src="https://img.shields.io/badge/pyEDAA-Reports-29b6f6.svg?longCache=true&amp;style=flat-square&amp;logo=GitHub&amp;labelColor=0277bd" style="height: 22px;" /></a> <a class="reference external" href="https://edaa-org.github.io/pyEDAA.Reports/"><img alt="Documentation - Read Now!" src="https://img.shields.io/website?longCache=true&amp;style=flat-square&amp;label=edaa-org.github.io%2FpyEDAA.Reports&amp;logo=GitHub&amp;logoColor=fff&amp;up_color=blueviolet&amp;up_message=Read%20now%20%E2%9E%9A&amp;url=https%3A%2F%2Fedaa-org.github.io%2FpyEDAA.Reports%2Findex.html" style="height: 22px;" /></a> <a class="reference external" href="https://gitter.im/hdl/community"><img alt="Documentation License" src="https://img.shields.io/badge/chat-on%20gitter-4db797.svg?longCache=true&amp;style=flat-square&amp;logo=gitter&amp;logoColor=e8ecef" style="height: 22px;" /></a></div>
+<div class="line"><a class="reference external" href="https://GitHub.com/edaa-org/pyEDAA.Reports/actions/workflows/Pipeline.yml"><img alt="GitHub Workflow - Build and Test Status" src="https://img.shields.io/github/workflow/status/edaa-org/pyEDAA.Reports/Pipeline/main?longCache=true&amp;style=flat-square&amp;label=Build%20and%20Test&amp;logo=GitHub%20Actions&amp;logoColor=FFFFFF" style="height: 22px;" /></a> <a class="reference external" href="https://www.codacy.com/gh/edaa-org/pyEDAA.Reports"><img alt="Codacy - Quality" src="https://img.shields.io/codacy/grade/f8142b422c1742bdba38e8ac1893870c?longCache=true&amp;style=flat-square&amp;logo=codacy" style="height: 22px;" /></a></div>
+</div>
+<section id="the-pyedaa-reports-documentation">
+<h1>The pyEDAA.Reports Documentation<a class="headerlink" href="#the-pyedaa-reports-documentation" title="Link to this heading"></a></h1>
+<p>A collection of various (EDA tool-specific) report data formats.</p>
+<section id="main-goals">
+<span id="goals"></span><h2>Main Goals<a class="headerlink" href="#main-goals" title="Link to this heading"></a></h2>
+<p>This package provides abstract data models and specific implementations for report formats. The supported report formats
+are commonly used for any programming language or have a specifc context with Electronic Design Automation (EDA) tools.
+Examples are unit test summaries (like Ant JUnit XML), code coverage (like Cobertura) and documentation coverage reports.</p>
+<p>While the data models and file format implementations can be used as a library, a CLI program <code class="docutils literal notranslate"><span class="pre">pyedaa-report</span></code> will be
+provided too. It allows reading, converting, concatenating, merging, transforming and writing report files.</p>
+<div class="admonition-roadmap admonition">
+<p class="admonition-title">Roadmap</p>
+<p>It’s also planned to support console outputs from simulators and synthesis/implementation tools to create structured
+logs and reports for filtering and data extraction.</p>
+</div>
+</section>
+<section id="report-formats">
+<h2>Report Formats<a class="headerlink" href="#report-formats" title="Link to this heading"></a></h2>
+<div class="sd-container-fluid sd-sphinx-override sd-mb-4 docutils">
+<div class="sd-row sd-row-cols-3 sd-row-cols-xs-3 sd-row-cols-sm-3 sd-row-cols-md-3 sd-row-cols-lg-3 docutils">
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="CodeCoverage/index.html#codecov"><span class="std std-ref">🚧 Code Coverage</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Code coverage measures used and unused code lines, statements, branches, etc. Depending on the programming
+language this is measured by instrumenting the code/binary and running the program, it’s test cases or simulating
+the code. In generate code coverage is a measure of test coverage. Unused code is not (yet) covered by tests.</p>
+<p class="sd-card-text">The code coverage metric in percent is a ratio of used code versus all possibly usable code. A coverage of &lt;100%
+indicates unused code. This can be dead code (unreachable) or untested code (⇒ needs more test cases).</p>
+<p class="sd-card-text"><strong>Supported tools</strong></p>
+<ul class="simple">
+<li><p class="sd-card-text">Coverage.py / pytest-cov</p></li>
+<li><p class="sd-card-text">Aldec Riviera-PRO</p></li>
+<li><p class="sd-card-text">others tbd. (GHDL with enabled coverage)</p></li>
+</ul>
+<p class="sd-card-text"><strong>Supported file formats</strong></p>
+<ul class="simple">
+<li><p class="sd-card-text">Cobertura</p></li>
+<li><p class="sd-card-text">others tbd. (gcov)</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="DocCoverage/index.html#doccov"><span class="std std-ref">🚧 Documentation Coverage</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Documentation coverage measures the presence of code documentation. It primarily counts for public language
+entities like publicly visible constants and variables, parameters, types, functions, methods, classes, modules,
+packages, etc. The documentation goal depends on the used coverage collection tool’s settings. E.g. usually,
+private language entities are not required to be documented.</p>
+<p class="sd-card-text">The documentation coverage metric in percent is a ratio of documented language entity versus all documentation
+worthy langauge entities. A coverage of &lt;100% indicates undocumented code.</p>
+<p class="rubric">Supported tools</p>
+<ul class="simple">
+<li><p class="sd-card-text">docstr_coverage</p></li>
+<li><p class="sd-card-text">others tbd. (GHDL)</p></li>
+</ul>
+<p class="rubric">Supported file formats</p>
+<ul class="simple">
+<li><p class="sd-card-text">tbd.</p></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sd-col sd-d-flex-row sd-col-4 sd-col-xs-4 sd-col-sm-4 sd-col-md-4 sd-col-lg-4 docutils">
+<div class="sd-card sd-sphinx-override sd-w-100 sd-shadow-sm docutils">
+<div class="sd-card-header docutils">
+<p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest"><span class="std std-ref">Unit Test Summaries</span></a></p>
+</div>
+<div class="sd-card-body docutils">
+<p class="sd-card-text">Results of (unit) tests (also regression tests) are collected in machine readable summary files. Test cases are
+usually grouped by one or more test suites. Besides the test’s result (passed, failed, skipped, …) also the
+test’s outputs and durations are collected. Results can be visualized as a expandable tree structure.</p>
+<p class="sd-card-text">The total number of testcases indicates the spend effort in testing and applying many test vectors. In combination
+with code coverage, it can be judged if the code has untested sections.</p>
+<p class="rubric">Supported features</p>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-feature-read"><span class="std std-ref">Read Ant JUnit XML files (and various dialects)</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-feature-merge"><span class="std std-ref">Merge Ant JUnit reports</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-feature-concat"><span class="std std-ref">Concatenate Ant JUnit reports</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-feature-transform"><span class="std std-ref">Transform the hierarchy of reports</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-feature-write"><span class="std std-ref">Write Ant JUnit reports (also to other dialects)</span></a></p></li>
+</ul>
+<p class="rubric">Supported file formats</p>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-fileformats-antjunit4"><span class="std std-ref">Ant JUnit4 XML format and various dialects</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-fileformats-junit5"><span class="std std-ref">JUnit5 XML format (Open Test Reporting)</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-fileformats-osvvm"><span class="std std-ref">OSVVM YAML format</span></a></p></li>
+</ul>
+<p class="rubric">Supported tools</p>
+<ul class="simple">
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-tool-ctest"><span class="std std-ref">CTest</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-tool-googletest"><span class="std std-ref">GoogleTest</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-tool-junit4"><span class="std std-ref">Ant + JUnit4</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-tool-junit5"><span class="std std-ref">JUnit5</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-tool-osvvm"><span class="std std-ref">OSVVM</span></a></p></li>
+<li><p class="sd-card-text"><a class="reference internal" href="Unittesting/index.html#unittest-tool-pytest"><span class="std std-ref">pyTest</span></a></p></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="consumers">
+<span id="id1"></span><h2>Consumers<a class="headerlink" href="#consumers" title="Link to this heading"></a></h2>
+<p>This layer is used by:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/pyTooling/Actions/">pyTooling/Actions → PublishTestResults</a></p></li>
+<li><p>🚧 <a class="reference external" href="https://github.com/pyTooling/sphinx-reports">pyTooling/Sphinx-Reports</a></p></li>
+</ul>
+</section>
+<section id="contributors">
+<span id="id2"></span><h2>Contributors<a class="headerlink" href="#contributors" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://GitHub.com/Paebbels">Patrick Lehmann</a> (Maintainer)</p></li>
+<li><p><a class="reference external" href="https://GitHub.com/umarcor/">Unai Martinez-Corral</a></p></li>
+<li><p><a class="reference external" href="https://GitHub.com/edaa-org/pyEDAA.Reports/graphs/contributors">and more…</a></p></li>
+</ul>
+<div class="admonition-todo admonition" id="id3">
+<span id="license"></span><p class="admonition-title">Todo</p>
+<p>add license texts here</p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Installation.html" class="btn btn-neutral float-right" title="Installation/Updates" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021-2024, Electronic Design Automation Abstraction (EDA²).
+      <span class="lastupdated">Last updated on 09.11.2024.
+      </span></p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
