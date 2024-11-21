@@ -1,0 +1,266 @@
+#-----------------------------------------------------------
+# Vivado v2021.2 (64-bit)
+# SW Build 3367213 on Tue Oct 19 02:48:09 MDT 2021
+# IP Build 3369179 on Thu Oct 21 08:25:16 MDT 2021
+# Start of session at: Thu Dec  9 12:44:01 2021
+# Process ID: 30416
+# Current directory: C:/Training/Solutions/StopWatch/project/StopWatch.runs/synth_StopWatch
+# Command line: vivado.exe -log toplevel.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source toplevel.tcl
+# Log file: C:/Training/Solutions/StopWatch/project/StopWatch.runs/synth_StopWatch/toplevel.vds
+# Journal file: C:/Training/Solutions/StopWatch/project/StopWatch.runs/synth_StopWatch\vivado.jou
+# Running On: Paebbels-Laptop, OS: Windows, CPU Frequency: 2400 MHz, CPU Physical cores: 8, Host memory: 34073 MB
+#-----------------------------------------------------------
+source toplevel.tcl -notrace
+Command: read_checkpoint -auto_incremental -incremental C:/Training/Solutions/StopWatch/project/StopWatch.srcs/utils_1/imports/synth_1/toplevel.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from C:/Training/Solutions/StopWatch/project/StopWatch.srcs/utils_1/imports/synth_1/toplevel.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top toplevel -part xc7a100tcsg324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+WARNING: [Designutils 20-4072] Reference run did not run incremental synthesis because the design is too small; reverting to default synthesis
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 10572
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'toplevel' [C:/Training/Solutions/StopWatch/src/toplevel.StopWatch.vhdl:24]
+INFO: [Synth 8-638] synthesizing module 'Debouncer' [C:/Training/Solutions/StopWatch/src/Debouncer.vhdl:23]
+	Parameter CLOCK_FREQ bound to: 64'b0000000000000000000000000000000000000101111101011110000100000000 
+	Parameter BITS bound to: 2 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'Debouncer' (1#1) [C:/Training/Solutions/StopWatch/src/Debouncer.vhdl:23]
+INFO: [Synth 8-638] synthesizing module 'Stopwatch' [C:/Training/Solutions/StopWatch/src/StopWatch.vhdl:28]
+	Parameter CLOCK_FREQ bound to: 64'b0000000000000000000000000000000000000101111101011110000100000000 
+	Parameter TIMEBASE bound to: 64'b0000000000000000000010010001100001001110011100101010000000000000 
+	Parameter CONFIG bound to: 128'b00000000000000000000000000010100000000000000000000000000000011000000000000000000000000000001010000000000000000000000000000001100 
+INFO: [Synth 8-226] default block is never used [C:/Training/Solutions/StopWatch/src/StopWatch.vhdl:59]
+INFO: [Synth 8-638] synthesizing module 'Counter' [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+	Parameter MODULO bound to: 62 - type: integer 
+	Parameter BITS bound to: 1 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'Counter' (2#1) [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+INFO: [Synth 8-638] synthesizing module 'Counter__parameterized0' [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+	Parameter MODULO bound to: 10 - type: integer 
+	Parameter BITS bound to: 4 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'Counter__parameterized0' (2#1) [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+INFO: [Synth 8-638] synthesizing module 'Counter__parameterized1' [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+	Parameter MODULO bound to: 6 - type: integer 
+	Parameter BITS bound to: 4 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'Counter__parameterized1' (2#1) [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+INFO: [Synth 8-256] done synthesizing module 'Stopwatch' (3#1) [C:/Training/Solutions/StopWatch/src/StopWatch.vhdl:28]
+INFO: [Synth 8-638] synthesizing module 'seg7_Display' [C:/Training/Solutions/StopWatch/src/seg7_Display.vhdl:27]
+	Parameter CLOCK_FREQ bound to: 64'b0000000000000000000000000000000000000101111101011110000100000000 
+	Parameter DIGITS bound to: 4 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'Counter__parameterized2' [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+	Parameter MODULO bound to: 100000 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'Counter__parameterized2' (3#1) [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+INFO: [Synth 8-638] synthesizing module 'Counter__parameterized3' [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+	Parameter MODULO bound to: 4 - type: integer 
+	Parameter BITS bound to: 2 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'Counter__parameterized3' (3#1) [C:/Training/Solutions/StopWatch/src/Counter.vhdl:24]
+INFO: [Synth 8-638] synthesizing module 'seg7_Encoder' [C:/Training/Solutions/StopWatch/src/seg7_Encoder.vhdl:17]
+INFO: [Synth 8-226] default block is never used [C:/Training/Solutions/StopWatch/src/seg7_Encoder.vhdl:23]
+INFO: [Synth 8-256] done synthesizing module 'seg7_Encoder' (4#1) [C:/Training/Solutions/StopWatch/src/seg7_Encoder.vhdl:17]
+INFO: [Synth 8-256] done synthesizing module 'seg7_Display' (5#1) [C:/Training/Solutions/StopWatch/src/seg7_Display.vhdl:27]
+INFO: [Synth 8-256] done synthesizing module 'toplevel' (6#1) [C:/Training/Solutions/StopWatch/src/toplevel.StopWatch.vhdl:24]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'Stopwatch'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                Previous Encoding 
+---------------------------------------------------------------------------------------------------
+                st_reset |                             0001 |                               00
+                 st_idle |                             0010 |                               01
+             st_counting |                             0100 |                               10
+                st_pause |                             1000 |                               11
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'one-hot' in module 'Stopwatch'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input    9 Bit       Adders := 2     
+	   2 Input    6 Bit       Adders := 1     
+	   2 Input    4 Bit       Adders := 2     
+	   2 Input    3 Bit       Adders := 2     
+	   2 Input    2 Bit       Adders := 1     
++---Registers : 
+	                9 Bit    Registers := 2     
+	                8 Bit    Registers := 2     
+	                6 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   4 Input    4 Bit        Muxes := 2     
+	   2 Input    4 Bit        Muxes := 1     
+	   2 Input    1 Bit        Muxes := 6     
+	   4 Input    1 Bit        Muxes := 1     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+-------+------+
+|      |Cell   |Count |
++------+-------+------+
+|1     |BUFG   |     1|
+|2     |CARRY4 |     5|
+|3     |LUT1   |     8|
+|4     |LUT2   |    11|
+|5     |LUT3   |    13|
+|6     |LUT4   |    23|
+|7     |LUT5   |    11|
+|8     |LUT6   |    14|
+|9     |FDRE   |    63|
+|10    |FDSE   |    12|
+|11    |IBUF   |     3|
+|12    |OBUF   |    16|
++------+-------+------+
+
+Report Instance Areas: 
++------+-----------------------+--------------------------+------+
+|      |Instance               |Module                    |Cells |
++------+-----------------------+--------------------------+------+
+|1     |top                    |                          |   180|
+|2     |  deb                  |Debouncer                 |    44|
+|3     |  display              |seg7_Display              |    35|
+|4     |    cnt1khZ            |Counter__parameterized2   |    27|
+|5     |    cntDigitSelect     |Counter__parameterized3   |     8|
+|6     |  sw                   |Stopwatch                 |    69|
+|7     |    TimeBaseCnt        |Counter                   |    19|
+|8     |    \genDigits[0].cnt  |Counter__parameterized0   |    10|
+|9     |    \genDigits[1].cnt  |Counter__parameterized1   |     7|
+|10    |    \genDigits[2].cnt  |Counter__parameterized0_0 |    10|
+|11    |    \genDigits[3].cnt  |Counter__parameterized1_1 |    16|
++------+-----------------------+--------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1260.668 ; gain = 0.000
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 1 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1260.668 ; gain = 0.000
+Synthesis Optimization Complete : Time (s): cpu = 00:00:21 ; elapsed = 00:00:21 . Memory (MB): peak = 1260.668 ; gain = 0.000
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1260.668 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 5 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1260.668 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Synth Design complete, checksum: 66137fa
+INFO: [Common 17-83] Releasing license: Synthesis
+39 Infos, 2 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:23 ; elapsed = 00:00:33 . Memory (MB): peak = 1260.668 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Training/Solutions/StopWatch/project/StopWatch.runs/synth_StopWatch/toplevel.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file toplevel_utilization_synth.rpt -pb toplevel_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Thu Dec  9 12:44:40 2021...
